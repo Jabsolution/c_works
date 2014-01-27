@@ -17,17 +17,20 @@ void arrange_queens(char (*chess)[8], int x_pos, int y_pos, int no_of_queens) {
     int y_tmp = 0;
     int i = 0;
     int j = 0;
-    printf("Queen needs to be arranged at row [%d, %d], queens remaining"
-            ": %d\n", x_pos, y_pos, no_of_queens);
     if (y_pos > 7 && no_of_queens != 0)
         return;
+    if (no_of_queens == 0) 
+        return;
+    printf("Queen needs to be arranged at row [%d, %d], queens remaining"
+                        ": %d\n", x_pos, y_pos, no_of_queens);
+
     while(x_incr <= 7) {
         if(x_pos == 0 && y_pos == 0) {
             chess[0][0] = 'x';
             printf("Putting the first queen");
             printf("[%d, %d]\n", x, y);
             arrange_queens(chess, 0, y_pos + 1, no_of_queens-1);
-               printf("Not doing another round\n");
+            printf("Not doing another round\n");
             return;
         }
         x_tmp = x_pos = x_incr++;
@@ -63,7 +66,7 @@ void arrange_queens(char (*chess)[8], int x_pos, int y_pos, int no_of_queens) {
             }   
 
         }
-        arrange_queens(chess, x_pos, y_pos + 1, no_of_queens-1);
+        arrange_queens(chess, 0, y_pos + 1, no_of_queens-1);
         printf("Removing [%d, %d]", x_pos, y_pos);
         chess[x_pos][y_pos] = '0'; 
     }
