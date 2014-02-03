@@ -13,7 +13,7 @@ int main() {
     alph[2][1] = 'e';
     alph[2][2] = 'f';
 
-    generate_mapping(alph, "121", buf_str, 0);
+    generate_mapping(alph, "221", buf_str, 0);
 
 }
 
@@ -23,22 +23,23 @@ void generate_mapping(int (*arr)[3], char *map_str, char *buf_str,
     int j = 0;
     int tmp = 0;
     int k = buf_str_idx;
+    int same_digit = 0;
    
     if (!map_str) 
         return;
     while (j < 3) {
         i = 0;
-        tmp = 0;
         k = buf_str_idx;
+        same_digit = 0;
         while (map_str[i]) {
             if (!tmp || ((map_str[i] - '0') == tmp)) {
                 buf_str[k++] = arr[map_str[i] - '0'][j];
                 tmp = map_str[i] - '0';
+                same_digit++;
             } else {
                 buf_str_idx = k;
                 generate_mapping(arr, &map_str[i], buf_str, buf_str_idx);
-                printf("K is %d", k);
-                if (tmp > 1) 
+                if (same_digit > 1) 
                     buf_str_idx = 0;
                 else 
                     buf_str_idx = k - 1;
