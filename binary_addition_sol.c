@@ -1,11 +1,20 @@
+/*
+ * You have two numbers decomposed in binary representation, write a 
+ * function that sums them and returns the result. 
+ *
+ * Input: 100011, 100100 
+ * Output: 1000111
+ *
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
 void bin_add(int, int, int, int, int);
 
 int main() {
-    int a = 1011;
-    int b =  110;
+    int a = 100011;
+    int b =  100100;
     bin_add(a, b, 0, 1, 0);
 }
 
