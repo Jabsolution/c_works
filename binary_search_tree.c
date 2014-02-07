@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 typedef struct _tree {
-    int ele;
+    void *ele;
     struct _tree *left;
     struct _tree *right;
 } tree;
@@ -16,7 +16,7 @@ int main() {
     tree *head = NULL;
 
     for(idx = 0; idx < 8; idx++) {
-        insert_tree(&head, items[idx]);
+        insert_tree(&head, (void *)&items[idx]);
     }
 
     print_tree_inorder(head);
@@ -30,7 +30,7 @@ void print_tree_inorder(tree *head) {
     print_tree_inorder(head->right);
 }
 
-void insert_tree(tree **head, int ele) {
+void insert_tree(tree **head, void *ele) {
     tree *node = *head;
     tree *prevNode;
 
@@ -44,7 +44,7 @@ void insert_tree(tree **head, int ele) {
 
     if (!*head) {
         node = malloc(sizeof(tree));
-        node->ele = ele;
+        node->ele = (void *)ele;
         node->left = NULL;
         node->right = NULL;
         *head = node;
