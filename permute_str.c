@@ -1,27 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void permute_str(char *str, int count);
+void permute_str(char *str, int, int);
+void swap(char *, char *);
 
-int main() {
-    char str[] = {"abc"};
-    int count = 1;
-    permute_str(str, count);
+void swap(char *x, char *y) {
+    char temp_str;
+    temp_str = *y;
+    *y = *x;
+    *x = temp_str;
 }
 
-void permute_str(char *str, int count) {
-    char temp_char;
-    if (!str[count]) 
-        return;
-    permute_str(str, count + 1);
-    printf("%s", str);
-    return;
-    while(str[count + 1]) {
-        temp_char = str[count];
-        str[count] = str[count + 1];
-        str[count + 1] = temp_char;
-        permute_str(str, count + 1);
+int main() {
+    char str[4] = "abc";
+    permute_str(str, 0, 2);
+}
+
+void permute_str(char *str, int i, int n) {
+    int j;
+
+    if (i == n) {
+        printf("%s\n", str);
+    } else {
+        for (j = i; j <= n; j++) {
+            swap((str + i), (str + j));
+            permute_str(str, i + 1, n);
+            swap((str + i), (str + j));
+        }
+
     }
-    return;
+
 }
 
