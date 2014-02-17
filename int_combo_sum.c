@@ -21,8 +21,12 @@ void print_combo_sum(char *str, int no, int idx) {
         return;
     }
 
+    /*
+     * Exclude N+0 = N
+     */
     if (idx) {
         str[idx++] = '0' + no;
+        str[idx] = '\0';
         printf("Str: %s\n", str);
         idx = idx - 1;
     }
