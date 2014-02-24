@@ -28,12 +28,12 @@ void enqueue(qinfo **q, void *ele) {
     (*q)->count++;
 }
 
-queue *dequeue(qinfo **q) {
+void *dequeue(qinfo **q) {
     queue *node;
     if (!(*q)->head) {
         return NULL;
     }
     node = (*q)->head;
     (*q)->head = node->next;
-    return node;
+    return (node->items);
 }

@@ -13,5 +13,5 @@ typedef struct _qinfo {
 } qinfo;
 
 extern void enqueue(qinfo **, void *);
-extern queue *dequeue(qinfo **);
+extern void *dequeue(qinfo **);
 extern void qinit(qinfo **);
