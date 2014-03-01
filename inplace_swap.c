@@ -1,3 +1,7 @@
+/*
+ * Swap two numbers without using any extra memory
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

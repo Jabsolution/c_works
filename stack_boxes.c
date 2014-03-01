@@ -1,3 +1,9 @@
+/*
+ *
+ * Stack boxes based on their b(breadth) x h(heigh) x d(depth).
+ *
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,3 +1,7 @@
+/*
+ * Print tree in BFS style.
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"

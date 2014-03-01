@@ -1,3 +1,8 @@
+/*
+ * This program prints all k > 1 combinations 
+ * from an array of N integers
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

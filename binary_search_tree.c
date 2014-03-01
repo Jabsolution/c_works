@@ -1,8 +1,14 @@
+/*
+ * A simple binary search tree
+ *
+ * This program first builds a tree and print it in-order
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct _tree {
-    void *ele;
+    void *ele; // Generic tree
     struct _tree *left;
     struct _tree *right;
 } tree;

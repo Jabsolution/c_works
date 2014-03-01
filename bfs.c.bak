@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "queue.h"
+
+typedef struct _tree {
+    void *ele;
+    struct _tree *left;
+    struct _tree *right;
+} tree;
+
+typedef struct _queue_node {
+    void *tree_node;
+    struct _queue_node *parent;
+    int color = 0; // Not yet visited
+} queue_node;
+
+void insert_tree(tree **, int);
+void bfs(void *);
+void init_queue_node(queue_node **, void *);
+
+int main() {
+    int items[]={45, 23, 98, 38, 2, 12, 98, 101, 36};
+    int idx = 0;
+    tree *head = NULL;
+
+    for(idx = 0; idx < 8; idx++) {
+        insert_tree(&head, (void *)&items[idx]);
+    }
+
+    // Print tree in BFS stlye
+    void bfs(head);
+}
+
+void bfs(void *head) {
+    queue_node *q = NULL;
+    quene_node *par_node = NULL;
+    qinfo *a = NULL;
+    qinit(&a); // initialize the queue
+    
+    if (!head) 
+        return;
+
+    /*
+     * Inti queue with bfs info, point it to the tree node
+     */
+    init_queue_node(&q, head); 
+    enqueue(&a, (void *)q);
+    while (par_node = (queue_node *)dequeue(&a)) {
+        if (((tree *)par_node->tree_node)->val >= ((tree *)par_node->tree_node)->left->val) {
+            init_queue_node(&q, (void *)q->tree_node->left);
+            q->color = 1; // gray (queued)
+            q->parent = par_node; 
+            enqueue(&a, (void *)q);
+        } else if (
+           (((tree *)q->tree_node)->val < ((tree *)q->tree_node)->right->val)) {
+           init_queue_node(&a, ((void *)q->tree_node)->left);
+        } else {
+            printf("This is not a binary search tree\n");
+        }
+
+    }
+}
+
+void init_queue_node(queue_node **q, void *node) {
+    if (!*q)
+        return;
+
+    *q = (queue_node *)malloc(sizeof(queue_node));
+    (*q)->tree_node = node;
+    (*q)->color = white;
+    (*q)->parent = NULL;
+}
+
+void insert_tree(tree **head, void *ele) {
+    tree *node = *head;
+    tree *prevNode;
+
+    while (node) {
+        prevNode = node;
+        if (ele < node->ele) 
+            node = node->left; 
+        else 
+            node = node->right;
+    }
+
+    if (!*head) {
+        node = malloc(sizeof(tree));
+        node->ele = (void *)ele;
+        node->left = NULL;
+        node->right = NULL;
+        *head = node;
+    } else if (ele < prevNode->ele) {
+        node = malloc(sizeof(tree));
+        node->ele = ele;
+        node->left = NULL;
+        node->right = NULL;
+        prevNode->left = node;
+    } else {
+        node = malloc(sizeof(tree));
+        node->ele = ele;
+        node->right = NULL;
+        node->left = NULL;
+        prevNode->right = node;
+    }
+}
