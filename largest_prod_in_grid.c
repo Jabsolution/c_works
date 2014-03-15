@@ -1,24 +1,167 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define M 4
 
 int largest_prod_in_grid(int (*a)[], int, int, int);
-int largestHorizontalProduct(int (*a)[4], int x, int y_lo, int y_hi, int);
-int calculate_cross_product(int (*a)[4], int x, int mid, int);
+int largest_prod_diag_grid(int (*a)[], int, int, int);
+int largestHorizontalProduct(int (*a)[], int, int, int, int);
+int largestDiagProduct(int (*a)[], int, int, int);
+int calculate_cross_product(int (*a)[], int, int, int);
 
 int main() {
     int largest_hor_prod = 0;
     int largest_ver_prod = 0;
+    int largest_diag_prod1 = 0;
+    int largest_diag_prod2 = 0;
+
     int a[4][4] = {
         {8, 2, 22, 97}, 
         {49, 49, 99, 40},
         {81, 49, 31, 73},
         {52, 70, 95, 23},
     };
-    largest_hor_prod = largest_prod_in_grid(a, 0, 3, 0);
-    largest_ver_prod = largest_prod_in_grid(a, 0, 3, 1);
-    printf("largestHorizontalProduct: %d\n", largest_hor_prod);
-    printf("largestVerticalProduct: %d\n", largest_ver_prod);
+//    largest_hor_prod = largest_prod_in_grid(a, 0, 3, 0);
+ //   largest_ver_prod = largest_prod_in_grid(a, 0, 3, 1);
+    largest_diag_prod1 = largest_prod_diag_grid(a, 1, 5, 0);
+  //  largest_diag_prod2 = largest_prod_diag_grid(a, 0, 3, 1);
 
+    //printf("largestHorizontalProduct: %d\n", largest_hor_prod);
+    //printf("largestVerticalProduct: %d\n", largest_ver_prod);
+    printf("largestdiag1Product: %d\n", largest_diag_prod1);
+    //printf("largestdiag2Product: %d\n", largest_diag_prod2);
+}
+
+int largest_prod_diag_grid(int (*a)[4], int lo, int hi, int dir) {
+    int mid = 0;
+    mid = (lo + hi) / 2;
+    int i = 0;
+    int k = 0;
+    int j = 0;
+    int d_prod = 1;
+    int left_prod = 1;
+    int right_prod = 1;
+
+    if (lo == hi) {
+        printf("lo: %d hi: %d\n", lo, hi);
+        if (lo >= M && hi >= M) {
+            lo = (lo - M) + 1;
+            hi = (hi - M) + 1;
+            if (!dir) {
+                k = lo;
+                for (i = M - 1; i >= lo; i--) {
+                    printf("%d ", a[i][k++]);
+                }
+                printf("\n");
+                d_prod = largestDiagProduct(a, M - lo, M - lo, 0);
+            } else {
+                k = (M - 1) - lo ;
+                for (i = M - 1; i >= lo; i--) {
+                    printf("%d ", a[i][k--]);
+                }
+                d_prod = largestDiagProduct(a, M - 1, (M - 1) - lo, 1);
+                printf("\n");
+            }   
+            return d_prod;
+        } else {
+            if (!dir) {
+                k = lo;
+                for (j = 0; j <= lo; j++) {
+                    printf("%d ", a[k--][j]);
+                }
+                printf("\n");
+                d_prod = largestDiagProduct(a, lo, 0, 0);
+            } else {
+                k = lo;
+                for (j = M - 1; k >= 0; j--) {
+                    printf("%d ", a[k--][j]);
+                }
+                printf("\n");
+                d_prod = largestDiagProduct(a, lo, M - 1, 1); 
+            }
+            return d_prod;
+        }
+    }
+    left_prod = largest_prod_diag_grid(a, lo, mid, dir);
+    right_prod = largest_prod_diag_grid(a, mid + 1, hi, dir);
+
+    if (left_prod > right_prod)
+        return left_prod;
+    else 
+        return right_prod;
+}
+
+int largestDiagProduct(int (*a)[4], int y_lo, int y_hi, int dir) {
+    int mid_y = (y_lo + y_hi) / 2;
+    int prod = 1;
+    int right_prod = 1;
+    int left_prod = 1;
+    int cross_prod = 1;
+    int i = 0;
+    int k = 0;
+    int ele = 0;
+    int limit = 0;
+
+    if (y_lo == y_hi) {
+        if ((y_lo - y_hi) + 1 == 2) {
+            ele = y_lo;
+            if (!dir) {
+                k = ele;
+                for (i = y_hi; i <= y_lo; i++) {
+                    printf("%d ", a[k--][i]);
+                    //prod *= a[k--][i];
+                }
+            }   
+            printf("prod: %d\n", prod);
+        
+            return prod;
+        }
+        left_prod = largestDiagProduct(a, y_lo, mid_y, dir);
+        right_prod = largestDiagProduct(a, (y_lo - mid_y) - 1, y_lo, dir);
+
+        printf("left_prod: %d right_prod: %d\n", left_prod, right_prod);
+        if (left_prod > right_prod)
+            return left_prod;
+        else
+        return right_prod;
+    }
+
+    printf("y_lo: %d y_hi: %d\n", y_lo, y_hi);
+    if ((y_lo - y_hi) > 0 && (y_hi + 1) == 2) {
+        ele = y_lo;
+        if (!dir) {
+            k = ele;
+            for (i = 0; i <= y_hi; i++) {
+                printf("%d ", a[k--][i]);
+                //prod *= a[k--][i];
+            }
+        }   
+        printf("prod: %d\n", prod);
+        
+        return prod;
+    } else if((y_hi - y_lo) > 0 && (y_lo + 1) == 2) {
+        ele = y_lo;
+        if (!dir) {
+            k = ele;
+            for (i = y_hi - y_lo; i <= y_hi; i++) {
+                printf("%d ", a[k--][i]);
+                //prod *= a[k--][i];
+            }
+        }   
+        printf("prod: %d\n", prod);
+        
+        return prod;
+    } else if ((y_lo - y_hi) < 2) {
+            return 0;
+    }
+
+    left_prod = largestDiagProduct(a, y_lo, mid_y, dir);
+    right_prod = largestDiagProduct(a, (y_lo - mid_y) - 1, y_lo, dir);
+
+    printf("left_prod: %d right_prod: %d\n", left_prod, right_prod);
+    if (left_prod > right_prod)
+        return left_prod;
+    else
+        return right_prod;
 }
 
 int largestHorizontalProduct(int (*a)[4], int x, int y_lo, int y_hi, int dir) {
