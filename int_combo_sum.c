@@ -51,6 +51,5 @@ void print_combo_sum(char *str, int no, int idx) {
         str[idx] = '\0';
         printf("Str: %s\n", str);
         idx = idx - 2;
-
     }
 }
