@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct _align {
+    short s;
+    short s1;
+    short s2;
+} align;
+
+typedef struct _align2 {
+    int a;
+    char b;
+} align2;
+
+int main() {
+    printf("sizeof %lu", sizeof(align));
+    printf("sizeof %lu", sizeof(align2));
+
+}
+

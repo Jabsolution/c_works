@@ -2,6 +2,7 @@
 #include <stdlib.h> 
 
 
+int count = 0;
 void swap (char *x, char *y) 
 { 
     char temp; 
@@ -14,15 +15,21 @@ void swap (char *x, char *y)
 void permute(char *a, int i, int n) 
 { 
     int j; 
-    if (i == n) 
-        printf("%s\n", a); 
+    if (i == n) {
+        ++count;
+        printf("%d: %s\n", count, a);
+        if (count == 1000002) {
+            printf("This is the end\n");
+            exit(1);
+        }
+    }
     else 
     { 
         for (j = i; j <= n; j++) 
         { 
-            swap((a+i), (a+j)); 
+            swap((a + j), (a + i)); 
             permute(a, i+1, n); 
-            swap((a+i), (a+j)); 
+            swap((a + j), (a + i)); 
         } 
     } 
 } 
@@ -31,9 +38,8 @@ void permute(char *a, int i, int n)
 int main() 
 { 
 
-    char a[] = "ABC"; 
+    char a[] = "021"; 
     permute(a, 0, 2); 
-    getchar(); 
     return 0; 
 }
 

@@ -9,9 +9,9 @@
 void swap(int *, int, int);
 void print_subset(int *, int, int, int, int, int *);
 int main() {
-    int arr[] = {3, 6, 5, 4};
-    int n = 4;
-    int k = 3;
+    int arr[] = {3, 6, 5, 4, 7};
+    int n = 5;
+    int k = 4;
     int buf_str[3] = {};
     print_subset(arr, 0, n, k, 0, buf_str);
 }

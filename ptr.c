@@ -1,11 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct _box {
+    int a;
+    int b;
+} box;
+
+void print_val(box *);
 int main() {
-    int x = 10;
-    int y = 20;
+    box boxes[] = {
+        {5, 4},
+        {6, 7}
+    };
 
-    &x = &y;
+    print_val(boxes);
+}
 
-    printf("%d \n", x);
+void print_val(box *b) {
+    b++;
+    printf("%d %d", b->a, b->b);
 }

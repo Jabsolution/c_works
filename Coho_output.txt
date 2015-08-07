@@ -1,0 +1,52 @@
+CASE 1:
+sjc-ads-3296:/ws/jaykdesa-sjc$cat coho.txt 
+aabbbbb
+0
+0
+9
+0 a - 1 1
+0 b - 1 2
+0 - - 1 6
+1 - a -1 3
+1 * * 1 1
+2 - b -1 3
+2 * * 1 2
+3 a - -1 4
+3 b - -1 5
+3 - - 1 6
+4 - a 1 0
+4 * * -1 4
+5 - b 1 0
+5 * * -1 5
+6 a - -1 7
+6 b - -1 8
+6 - - 0 9
+7 - a 1 0
+8 - b 1 0
+sjc-ads-3296:/ws/jaykdesa-sjc$gcc turing_machine.c -o a
+sjc-ads-3296:/ws/jaykdesa-sjc$./a coho.txt 
+aabbbbb 
+-abbbbb 
+-abbbbbsjc-ads-3296:/ws/jaykdesa-sjc$echo $?
+0
+
+CASE 2:
+sjc-ads-3296:/ws/jaykdesa-sjc$cat file1.txt 
+-baba-
+1
+0
+1
+0 a b 1 0
+0 b a 1 0
+0 - - 0 1
+sjc-ads-3296:/ws/jaykdesa-sjc$./a file1.txt 
+-baba- 
+-aaba- 
+-abba- 
+-abaa- 
+-abab- 
+-abab- 
+-abab-sjc-ads-3296:/ws/jaykdesa-sjc$echo $?
+0
+sjc-ads-3296:/ws/jaykdesa-sjc$
+

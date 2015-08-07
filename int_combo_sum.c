@@ -13,8 +13,8 @@
 void print_combo_sum(char *, int, int);
 
 int main() {
-    int no = 7;
-    char str[7] = {};
+    int no = 5;
+    char str[no + 1];
 
     print_combo_sum(str, no, 0);
 }

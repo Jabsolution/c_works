@@ -5,6 +5,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct _tree {
+    char *str;
+    struct tree *left;
+    struct tree *right;
+} tree;
+
 void swap_inplace(int *, int *);
 int main() {
     int x = 10;

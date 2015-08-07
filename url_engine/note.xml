@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Edited by XMLSpy -->
+<patterns>
+    <set1>*.aaa.com   *.bb.cc/*   dup.com   </set1>
+    <set2>  *.com *.yahoo.com   *.google.com   dup.com  </set2>
+</patterns>

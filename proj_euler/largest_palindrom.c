@@ -30,12 +30,9 @@ void show_product(int a) {
         for (i = a; i <= 999; i++, number = 0) {
             product = a * i;
             quo = product;
-           // printf("Prod: %d", product);
 
             while (quo) {
-                //printf("\nquo: %d", quo);
                 remainder = quo % 10;
-               // printf("\nremainder: %d", remainder);
                 number = number * 10 + remainder;
                 quo = quo / 10;
             }

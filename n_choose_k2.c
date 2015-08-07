@@ -14,12 +14,12 @@ void swap(char *p1, char *p2) {
 int main() {
     char str[] = "abcde";
     int n = 5;
-    int k = 4;
+    int k = 3;
 
-    print_permute_str(str, 0, k, n);
+    print_permute_str(str, 0, n, k);
 }
 
-void print_permute_str(char *str, int i, int k, int n) {
+void print_permute_str(char *str, int i, int n, int k) {
     int j = 0;
     int l = 0;
 
@@ -33,7 +33,7 @@ void print_permute_str(char *str, int i, int k, int n) {
 
     for (j = i; j < n; j++) {
         swap(&str[i], &str[j]);  
-        print_permute_str(str, i + 1, k, n);
+        print_permute_str(str, i + 1, n, k);
         swap(&str[i], &str[j]);
     }
 

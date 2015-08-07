@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int search_str_match(char, char *, int);
+
+int main() {
+    char *regex = "*.bb.cc/*";
+    char *str = "aa.bb.cc/dxx/cc";
+    int regex_idx = 0;
+    int str_idx   = 0;
+    int last_match_str = 0;
+    int wildcard  = -1;
+    int i = 0;
+    int j = 0;
+    int match = 1;
+
+    for (i = 0; regex[i] != '\0'; i++) {
+        if (regex[i] == '*') {
+            if (!match)
+                return 0;
+            // If we find a wildcard we go to the end of the current string
+            wildcard = j;
+            while (str[j] != '\0') {
+                j++;
+            }
+            match = 1; // So far everything is a match
+        } else {
+            regex_idx = i;
+            if (wildcard != -1) {
+                while ((last_match_str = search_str_match(regex[i], str, j)) != -1) {
+                    j = last_match_str;
+                    printf("\n");
+                    while (regex[i] != '\0' && str[j] != '\0') {
+                        if (regex[i] == str[j]) {
+                            printf("%c:%c ", regex[i], str[j]);
+                            i++;
+                            j++;
+                        } else {
+                            if (regex[i] == '*')
+                                match = 1;
+                            else 
+                                match = 0;
+                            i = regex_idx;
+                            j = last_match_str - 1;
+                            break;
+                        }
+                    }
+                    if (regex[i] == '\0' && str[j] == '\0') {
+                        printf("String match");
+                        return 0;
+                    }
+                    if (match)
+                        break;
+                    
+                }
+            } else {
+                if (regex[i] == str[j]) {
+                    j++;
+                } else {
+                    match = 0;
+                }
+            }
+        }
+    }
+    if (match)
+        printf("String match");
+}
+
+int search_str_match(char token, char *str, int j) {
+    while (j >= 0) {
+        if (str[j] == token) {
+            return j;
+        }
+        j--;
+    }
+    return -1;
+}
+
